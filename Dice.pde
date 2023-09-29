@@ -60,7 +60,7 @@ class Die //models one single dice cube
       triangle(myX-20,myY+15,myX,myY-25,myX-20,myY-7.5);
       triangle(myX+20,myY+15,myX,myY-25,myX+20,myY-7.5);
       textSize(26);
-      yShift = 0;
+      yShift = 1;
     }
     else if (type == 2) {
       triangle(myX-20,myY+18,myX+20,myY+18,myX,myY-23);
@@ -74,7 +74,7 @@ class Die //models one single dice cube
   /***
   TYPES OF DICE TO IMPLEMENT:
     Normal d6
-  Normal d4
+    Normal d4
     Normal d8
   Normal d12
   Normal d20
