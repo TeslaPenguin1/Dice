@@ -40,10 +40,11 @@ class Die //models one single dice cube
   }
   void roll()
   {
-    type = (int)(Math.random()*4);
+    type = (int)(Math.random()*5);
     if (type == 0) value = (int)(Math.random()*6)+1;
     if (type == 1) value = (int)(Math.random()*8)+1;
     if (type == 2) value = (int)(Math.random()*4)+1;
+    if (type == 3) value = (int)(Math.random()*12)+1;
   }
   void show()
   {
@@ -66,6 +67,16 @@ class Die //models one single dice cube
       triangle(myX-20,myY+18,myX+20,myY+18,myX,myY-23);
       textSize(28);
       yShift = 3;
+    }
+    else if (type == 3) {
+      beginShape();
+      vertex(myX-9,myY+14);
+      vertex(myX+9,myY+14);
+      vertex(myX+13,myY-5);
+      vertex(myX,myY-12);
+      vertex(myX-13,myY-5);
+      endShape();
+      textSize(20);
     }
     else textSize(1);
     fill(255);
