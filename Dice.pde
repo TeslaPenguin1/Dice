@@ -41,14 +41,14 @@ class Die //models one single dice cube
   }
   void roll()
   {
-    type = (int)(Math.random()*7);
-    if (type == 0) value = (int)(Math.random()*6)+1;
-    else if (type == 1) value = (int)(Math.random()*8)+1;
-    else if (type == 2) value = (int)(Math.random()*4)+1;
-    else if (type == 3) value = (int)(Math.random()*12)+1;
-    else if (type == 4) value = (int)(Math.random()*20)+1;
-    else if (type == 5) value = (int)(Math.random()*10);
-    else if (type == 6) value = (int)(Math.random()*10)*10;
+    type = (int)(Math.random()*8);
+    if (type == 0) value = (int)(Math.random()*6)+1;                    //d6 1-6
+    else if (type == 1) value = (int)(Math.random()*8)+1;               //d8 1-8
+    else if (type == 2) value = (int)(Math.random()*4)+1;               //d4 1-4
+    else if (type == 3 || type == 7) value = (int)(Math.random()*12)+1; //d12 1-12
+    else if (type == 4) value = (int)(Math.random()*20)+1;              //d20 1-20
+    else if (type == 5) value = (int)(Math.random()*10);                //d10 0-9
+    else if (type == 6) value = (int)(Math.random()*10)*10;             //d00 00-90
     else value = 0;
   }
   void show()
@@ -192,6 +192,21 @@ class Die //models one single dice cube
       yShift = -2;
       if (value == 0) funkyd00 = true;
     }
+    /***
+    Thus ends the "normal" dnd dice.... now onwards to weirder things!!!
+    ***/
+    else if (type == 7) { //rhombic d12
+      stroke(#EFFA58);
+      textColor = #F1F5BC;
+      quad(myX,myY-11,myX+17,myY,myX,myY+15,myX-17,myY);
+      quad(myX,myY-11,myX+17,myY,myX+17,myY-10,myX,myY-21);
+      quad(myX,myY+11,myX+17,myY,myX+17,myY+10,myX,myY+21);
+      quad(myX,myY-11,myX-17,myY,myX-17,myY-10,myX,myY-21);
+      quad(myX,myY+11,myX-17,myY,myX-17,myY+10,myX,myY+21);
+      yShift = 0;
+      if (value < 10) textSize(16);
+      else textSize(14);
+    }
     else textSize(1);
     fill(textColor);
     if (funkyd00) text("00",myX,myY+yShift);
@@ -206,15 +221,12 @@ class Die //models one single dice cube
     Normal d20
     Normal d10
     Normal "d100" (2d10)
-  Rhombic d12
-  d18
+    Rhombic d12
   Tetrakis d24
-  Pentagonal d24
-  d30
-  d48
-  Deltoidal d60
-  Pentagonal d60
-  d120
+  Rhombic d30
+  Disdyakis d48
+  Tryakis d60
+  Disdyaskis d120
   skew d6
   ***/
 }
