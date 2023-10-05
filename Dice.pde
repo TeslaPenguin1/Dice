@@ -3,6 +3,7 @@ int permaSum = 0;
 void setup()
 {
   size(500,550);
+  background(0);
   noLoop();
   textAlign(CENTER,CENTER);
   stroke(255);
@@ -10,7 +11,7 @@ void setup()
 void draw()
 {
   sum = 0;
-  fill(127);
+  fill(0);
   quad(0,0,0,600,500,600,500,0);
   for(int y = 25; y < 500; y+=50) {
     for(int x = 25; x < 500; x+=50) {
@@ -20,10 +21,10 @@ void draw()
        permaSum += die.value;
     }
   }
-  fill(0);
+  fill(200);
   textSize(30);
-  text(sum,150,525);
-  text(permaSum,350,525);
+  text("Value: "+str(sum),150,525);
+  text("Total: "+str(permaSum),350,525);
 }
 void mousePressed()
 {
@@ -40,38 +41,47 @@ class Die //models one single dice cube
   }
   void roll()
   {
-    type = (int)(Math.random()*5);
+    type = (int)(Math.random()*7);
     if (type == 0) value = (int)(Math.random()*6)+1;
     else if (type == 1) value = (int)(Math.random()*8)+1;
     else if (type == 2) value = (int)(Math.random()*4)+1;
     else if (type == 3) value = (int)(Math.random()*12)+1;
     else if (type == 4) value = (int)(Math.random()*20)+1;
+    else if (type == 5) value = (int)(Math.random()*10);
+    else if (type == 6) value = (int)(Math.random()*10)*10;
     else value = 0;
   }
   void show()
   {
     roll();
     fill(0);
+    stroke(255);
+    color textColor = #FFFFFF;
+    boolean funkyd00 = false;
     if (type == 0){ //d6
+      fill(255);
       quad(myX-20,myY-20,myX-20,myY+20,myX+20,myY+20,myX+20,myY-20);
       textSize(1);
-      fill(255);
-      if (value % 2 == 1) ellipse(myX,myY,5,5);
+      fill(0);
+      if (value % 2 == 1) ellipse(myX,myY,7,7);
       if (value > 1) {
-       ellipse(myX-10,myY-10,5,5);
-       ellipse(myX+10,myY+10,5,5);
+       ellipse(myX-10,myY-10,7,7);
+       ellipse(myX+10,myY+10,7,7);
       }
       if (value > 3) {
-       ellipse(myX-10,myY+10,5,5);
-       ellipse(myX+10,myY-10,5,5);
+       ellipse(myX-10,myY+10,7,7);
+       ellipse(myX+10,myY-10,7,7);
       }
       if (value == 6) {
-       ellipse(myX-10,myY,5,5);
-       ellipse(myX+10,myY,5,5);
+       ellipse(myX-10,myY,7,7);
+       ellipse(myX+10,myY,7,7);
       }
       yShift = 0;
     }
     else if (type == 1) { //d8
+      fill(#480583);
+      stroke(#A0F8FF);
+      textColor = #C0F6FA;
       triangle(myX-20,myY+15,myX+20,myY+15,myX,myY-25);
       triangle(myX-20,myY+15,myX+20,myY+15,myX,myY+22.5);
       triangle(myX-20,myY+15,myX,myY-25,myX-20,myY-7.5);
@@ -79,42 +89,20 @@ class Die //models one single dice cube
       textSize(26);
       yShift = 1;
     }
-    else if (type == 2) { //d4 - NEEDS WORK
-      /*triangle(myX-22,myY+18,myX+22,myY+18,myX,myY);
+    else if (type == 2) { //d4
+      fill(0);
+      stroke(200);
+      textColor = #FFFFFF;
+      triangle(myX-22,myY+18,myX+22,myY+18,myX,myY);
       triangle(myX+22,myY+18,myX,myY-23,myX,myY);
-      triangle(myX-22,myY+18,myX,myY-23,myX,myY);*/
-      
-      beginShape();
-      vertex(myX,myY-8);
-      vertex(myX+7,myY+6);
-      vertex(myX+14,myY+12);
-      vertex(myX+16,myY+5);
-      vertex(myX+5,myY-14);
-      vertex(myX,myY-18);
-      vertex(myX,myY-8);
-      endShape();
-      beginShape();
-      vertex(myX,myY-8);
-      vertex(myX-7,myY+6);
-      vertex(myX-14,myY+12);
-      vertex(myX-16,myY+5);
-      vertex(myX-5,myY-14);
-      vertex(myX,myY-18);
-      vertex(myX,myY-8);
-      endShape();
-      beginShape();
-      vertex(myX+7,myY+6);
-      vertex(myX-7,myY+6);
-      vertex(myX-14,myY+12);
-      vertex(myX-10,myY+18);
-      vertex(myX+10,myY+18);
-      vertex(myX+14,myY+12);
-      vertex(myX+7,myY+6);
-      endShape();
+      triangle(myX-22,myY+18,myX,myY-23,myX,myY);
       textSize(28);
-      yShift = 3;
+      yShift = 2;
     }
     else if (type == 3) { //d12
+      fill(#07645D);
+      stroke(#0EE3D3);
+      textColor = #0EE3D3;
       beginShape();
       vertex(myX-9,myY+14);
       vertex(myX+9,myY+14);
@@ -162,6 +150,9 @@ class Die //models one single dice cube
       yShift = 2;
     }
     else if (type == 4) { //d20
+      fill(0);
+      stroke(#FF0000);
+      textColor = #FA2D3B;
       triangle(myX,myY-15,myX+12,myY+9,myX-12,myY+9);
       triangle(myX,myY+24,myX+12,myY+9,myX-12,myY+9);
       triangle(myX,myY-15,myX+12,myY+9,myX+21,myY-10.5);
@@ -176,9 +167,35 @@ class Die //models one single dice cube
       if (value < 10) yShift = 1;
       else yShift = 3;
     }
+    else if (type == 5) { //d10
+      fill(#1DED59);
+      stroke(#1BAA45);
+      textColor = #5F5D32;
+      quad(myX,myY-20,myX+12,myY+3,myX,myY+7,myX-12,myY+3);
+      quad(myX,myY+7,myX+12,myY+3,myX+17,myY+5,myX,myY+20);
+      quad(myX,myY-20,myX+12,myY+3,myX+17,myY+5,myX+18,myY+2);
+      quad(myX,myY+7,myX-12,myY+3,myX-17,myY+5,myX,myY+20);
+      quad(myX,myY-20,myX-12,myY+3,myX-17,myY+5,myX-18,myY+2);
+      textSize(18);
+      yShift = -3;
+    }
+    else if (type == 6) { //d00
+      fill(#7563EA);
+      stroke(#1D183E);
+      textColor = #FFFFFF;
+      quad(myX,myY-20,myX+12,myY+3,myX,myY+7,myX-12,myY+3);
+      quad(myX,myY+7,myX+12,myY+3,myX+17,myY+5,myX,myY+20);
+      quad(myX,myY-20,myX+12,myY+3,myX+17,myY+5,myX+18,myY+2);
+      quad(myX,myY+7,myX-12,myY+3,myX-17,myY+5,myX,myY+20);
+      quad(myX,myY-20,myX-12,myY+3,myX-17,myY+5,myX-18,myY+2);
+      textSize(13);
+      yShift = -2;
+      if (value == 0) funkyd00 = true;
+    }
     else textSize(1);
-    fill(255);
-    text(value,myX,myY+yShift);
+    fill(textColor);
+    if (funkyd00) text("00",myX,myY+yShift);
+    else text(value,myX,myY+yShift);
   }
   /***
   TYPES OF DICE TO IMPLEMENT:
@@ -187,8 +204,8 @@ class Die //models one single dice cube
     Normal d8
     Normal d12
     Normal d20
-  Normal d10
-  Normal "d100" (2d10)
+    Normal d10
+    Normal "d100" (2d10)
   Rhombic d12
   d18
   Tetrakis d24
