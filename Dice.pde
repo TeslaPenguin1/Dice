@@ -12,6 +12,7 @@ void draw()
 {
   sum = 0;
   fill(0);
+  noStroke();
   quad(0,0,0,600,500,600,500,0);
   for(int y = 25; y < 500; y+=50) {
     for(int x = 25; x < 500; x+=50) {
@@ -49,6 +50,8 @@ class Die //models one single dice cube
     else if (type == 4) value = (int)(Math.random()*20)+1;              //d20 1-20
     else if (type == 5) value = (int)(Math.random()*10);                //d10 0-9
     else if (type == 6) value = (int)(Math.random()*10)*10;             //d00 00-90
+    //       type == 7 is included in another line
+    else if (type == 8) value = (int)(Math.random()*24)+1;              //d24 1-24
     else value = 0;
   }
   void show()
@@ -72,7 +75,7 @@ class Die //models one single dice cube
        ellipse(myX-10,myY+10,7,7);
        ellipse(myX+10,myY-10,7,7);
       }
-      if (value == 6) {
+      if (value > 5) {
        ellipse(myX-10,myY,7,7);
        ellipse(myX+10,myY,7,7);
       }
@@ -223,10 +226,5 @@ class Die //models one single dice cube
     Normal "d100" (2d10)
     Rhombic d12
   Tetrakis d24
-  Rhombic d30
-  Disdyakis d48
-  Tryakis d60
-  Disdyaskis d120
-  skew d6
   ***/
 }
