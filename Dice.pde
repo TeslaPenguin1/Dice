@@ -25,7 +25,7 @@ void draw()
     }
   }
   fill(200);
-  textSize(25);
+  textSize(22);
   text("Value: "+str(sum),115,510);
   text("Average: "+str(round(1000*permaSum/trial)/1000.0),250,530);
   text("Total: "+str(permaSum),385,510);
