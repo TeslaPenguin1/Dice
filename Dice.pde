@@ -27,7 +27,7 @@ void draw()
   fill(200);
   textSize(25);
   text("Value: "+str(sum),115,510);
-  text("Average: "+str(permaSum/trial),250,530);
+  text("Average: "+str(round(1000*permaSum/trial)/1000.0),250,530);
   text("Total: "+str(permaSum),385,510);
 }
 void mousePressed()
