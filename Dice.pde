@@ -1,5 +1,6 @@
 int sum = 0;
 int permaSum = 0;
+int trial = 0;
 void setup()
 {
   size(500,550);
@@ -12,6 +13,7 @@ void draw()
 {
   sum = 0;
   fill(0);
+  trial++;
   noStroke();
   quad(0,0,0,600,500,600,500,0);
   for(int y = 25; y < 500; y+=50) {
@@ -23,9 +25,10 @@ void draw()
     }
   }
   fill(200);
-  textSize(30);
-  text("Value: "+str(sum),150,525);
-  text("Total: "+str(permaSum),350,525);
+  textSize(25);
+  text("Value: "+str(sum),115,510);
+  text("Average: "+str(permaSum/trial),250,530);
+  text("Total: "+str(permaSum),385,510);
 }
 void mousePressed()
 {
