@@ -42,7 +42,7 @@ class Die //models one single dice cube
   }
   void roll()
   {
-    type = (int)(Math.random()*8);
+    type = (int)(Math.random()*9);
     if (type == 0) value = (int)(Math.random()*6)+1;                    //d6 1-6
     else if (type == 1) value = (int)(Math.random()*8)+1;               //d8 1-8
     else if (type == 2) value = (int)(Math.random()*4)+1;               //d4 1-4
@@ -64,6 +64,18 @@ class Die //models one single dice cube
     if (type == 0){ //d6
       fill(255);
       quad(myX-20,myY-20,myX-20,myY+20,myX+20,myY+20,myX+20,myY-20);
+      stroke(0);
+      fill(0);
+      quad(myX+21,myY+21,myX+15,myY+21,myX+15,myY+15,myX+21,myY+15);
+      quad(myX-21,myY+21,myX-15,myY+21,myX-15,myY+15,myX-21,myY+15);
+      quad(myX+21,myY-21,myX+15,myY-21,myX+15,myY-15,myX+21,myY-15);
+      quad(myX-21,myY-21,myX-15,myY-21,myX-15,myY-15,myX-21,myY-15);
+      fill(255);
+      stroke(255);
+      ellipse(myX+15,myY+15,10,10);
+      ellipse(myX-15,myY+15,10,10);
+      ellipse(myX+15,myY-15,10,10);
+      ellipse(myX-15,myY-15,10,10);
       textSize(1);
       fill(0);
       if (value % 2 == 1) ellipse(myX,myY,7,7);
@@ -201,7 +213,9 @@ class Die //models one single dice cube
     else if (type == 7) { //rhombic d12
       stroke(#EFFA58);
       textColor = #F1F5BC;
+      fill(#747244);
       quad(myX,myY-11,myX+17,myY,myX,myY+15,myX-17,myY);
+      fill(#62613C);
       quad(myX,myY-11,myX+17,myY,myX+17,myY-10,myX,myY-21);
       quad(myX,myY+11,myX+17,myY,myX+17,myY+10,myX,myY+21);
       quad(myX,myY-11,myX-17,myY,myX-17,myY-10,myX,myY-21);
@@ -210,21 +224,31 @@ class Die //models one single dice cube
       if (value < 10) textSize(16);
       else textSize(14);
     }
+    else if (type == 8) { //tetrakis d24
+      fill(#FFB640);
+      stroke(#E08B02);
+      textColor = #714701;
+      triangle(myX,myY-3,myX+17,myY+17,myX-17,myY+17);
+      fill(#FFB339);
+      triangle(myX,myY-3,myX+17,myY+17,myX+17,myY-17);
+      triangle(myX,myY-3,myX-17,myY+17,myX-17,myY-17);
+      triangle(myX,myY-3,myX+17,myY-17,myX-17,myY-17);
+      fill(#FFB236);
+      triangle(myX+17,myY+17,myX-17,myY+17,myX,myY+23);
+      triangle(myX+17,myY-17,myX-17,myY-17,myX,myY-20);
+      triangle(myX+17,myY-17,myX+17,myY+17,myX+21,myY-3);
+      triangle(myX-17,myY-17,myX-17,myY+17,myX-21,myY-3);
+      triangle(myX+17,myY+17,myX,myY+23,myX+18,myY+19);
+      triangle(myX-17,myY+17,myX,myY+23,myX-18,myY+19);
+      triangle(myX+17,myY+17,myX+18,myY+19,myX+21,myY-3);
+      triangle(myX-17,myY+17,myX-18,myY+19,myX-21,myY-3);
+      if (value < 10) yShift = 9;
+      else yShift = 10;
+      textSize(15);
+    }
     else textSize(1);
     fill(textColor);
     if (funkyd00) text("00",myX,myY+yShift);
     else text(value,myX,myY+yShift);
   }
-  /***
-  TYPES OF DICE TO IMPLEMENT:
-    Normal d6
-    Normal d4
-    Normal d8
-    Normal d12
-    Normal d20
-    Normal d10
-    Normal "d100" (2d10)
-    Rhombic d12
-  Tetrakis d24
-  ***/
 }
